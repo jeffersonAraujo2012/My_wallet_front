@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TitleApp from "../../components/TitleApp";
 import BtnFullWidth from "../../components/BtnFullWidth";
 import Input from "../../components/Input";
 import SimpleLink from "../../components/SimpleLink";
@@ -10,7 +11,7 @@ export default function LoginPage() {
 
   return (
     <LoginPageStyle>
-      <h1>MyWallet</h1>
+      <TitleApp />
   
       <form>
         <Input
