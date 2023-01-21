@@ -5,6 +5,7 @@ import HomePageStyle from "./style";
 
 import logOutIcon from "../../assets/log-out-icon.svg";
 import PageTitle from "../../components/PageTitle";
+import Registers from "../../components/Registers";
 
 export default function HomePage() {
   return (
@@ -14,9 +15,7 @@ export default function HomePage() {
         <img src={logOutIcon} alt="Sair" />
       </header>
 
-      <section>
-        <h2>Não há registros de entrada ou saída</h2>
-      </section>
+      <Registers />
 
       <div>
         <button>

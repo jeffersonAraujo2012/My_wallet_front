@@ -19,32 +19,7 @@ const HomePageStyle = styled.div`
     margin-bottom: 22px;
   }
 
-  section {
-    flex: auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    margin-bottom: 15px;
-
-    background-color: white;
-    border-radius: 5px;
-
-    h2 {
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 24px;
-      color: #868686;
-      text-align: center;
-
-      width: 60%;
-    }
-  }
-
-  div {
+  & > div {
     display: flex;
     align-items: stretch;
 

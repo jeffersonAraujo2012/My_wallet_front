@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
   .root {
     position: relative;
     background-color: #8C11BE;
-    padding: 24px;
+    padding: 24px 24px 16px;
     height: 100%;
     min-height: 100%;
   }
