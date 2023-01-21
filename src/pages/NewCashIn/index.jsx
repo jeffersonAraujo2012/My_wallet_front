@@ -23,7 +23,7 @@ export default function NewCashIn() {
           type="text"
           value={description}
           onChange={(e) => setDescription(e.currentTarget.value)}
-          placeholder="Senha"
+          placeholder="Descrição"
         />
         <BtnFullWidth text="Salvar entrada" />
       </form>
