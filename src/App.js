@@ -7,6 +7,7 @@ import GlobalStyle from "./style/GlobalStyle";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
+import NewCashIn from "./pages/NewCashIn";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <HomePage />,
+  },
+  {
+    path: "/nova-entrada",
+    element: <NewCashIn />,
   },
 ]);
 

@@ -19,13 +19,6 @@ const HomePageStyle = styled.div`
     margin-bottom: 22px;
   }
 
-  p {
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 30px;
-    color: white;
-  }
-
   section {
     flex: auto;
 
@@ -74,9 +67,11 @@ const HomePageStyle = styled.div`
 
       p {
         width: 50%;
+        font-weight: 700;
         font-size: 17px;
         line-height: 20px;
         text-align: left;
+        color: white;
       }
     }
 

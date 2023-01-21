@@ -4,12 +4,13 @@ import { addCircleOutline, removeCircleOutline } from "ionicons/icons";
 import HomePageStyle from "./style";
 
 import logOutIcon from "../../assets/log-out-icon.svg";
+import PageTitle from "../../components/PageTitle";
 
 export default function HomePage() {
   return (
     <HomePageStyle>
       <header>
-        <p>Olá, Fulano</p>
+        <PageTitle text="Olá, Fulano" />
         <img src={logOutIcon} alt="Sair" />
       </header>
 
