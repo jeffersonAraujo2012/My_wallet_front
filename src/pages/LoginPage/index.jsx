@@ -29,7 +29,7 @@ export default function LoginPage() {
         <BtnFullWidth text="Entrar" />
       </form>
 
-      <SimpleLink text="Primeira vez? Cadastre-se!" to="/signup" />
+      <SimpleLink text="Primeira vez? Cadastre-se!" to="/cadastro" />
     </LoginPageStyle>
   );
 }

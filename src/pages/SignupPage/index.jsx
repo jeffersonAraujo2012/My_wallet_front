@@ -43,7 +43,7 @@ export default function SignupPage() {
         <BtnFullWidth text="Cadastrar" />
       </form>
 
-      <SimpleLink text="Já tem uma conta? Entre agora!"/>
+      <SimpleLink text="Já tem uma conta? Entre agora!" to="/" />
     </SignupPageStyle>
   );
 }

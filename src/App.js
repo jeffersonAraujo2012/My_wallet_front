@@ -6,6 +6,7 @@ import GlobalStyle from "./style/GlobalStyle";
 
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +14,12 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/signup",
+    path: "/cadastro",
     element: <SignupPage />,
+  },
+  {
+    path: "/home",
+    element: <HomePage />,
   },
 ]);
 
