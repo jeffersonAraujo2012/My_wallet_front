@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
 import NewCashIn from "./pages/NewCashIn";
+import NewCashOut from "./pages/NewCashOut";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/nova-entrada",
     element: <NewCashIn />,
+  },
+  {
+    path: "/nova-saida",
+    element: <NewCashOut />,
   },
 ]);
 
