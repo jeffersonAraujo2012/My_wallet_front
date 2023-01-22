@@ -1,21 +1,44 @@
+import { useState } from "react";
+import axios from "axios";
+
 import SignupPageStyle from "./style";
 import TitleApp from "../../components/TitleApp";
 import Input from "../../components/Input";
-import { useState } from "react";
 import BtnFullWidth from "../../components/BtnFullWidth";
 import SimpleLink from "../../components/SimpleLink";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassoword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+
+  function signup(e) {
+    e.preventDefault();
+    const newUser = {
+      name: name,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+    };
+
+    const signupPromise = axios.post("http://localhost:5000/signup", newUser);
+    signupPromise.then((res) => {
+      if (res.status === 201) {
+        alert("Usuário criado com sucesso.");
+        navigate("/");
+      }
+    });
+    signupPromise.catch((err) => console.log(err.response.data));
+  }
 
   return (
     <SignupPageStyle>
       <TitleApp />
 
-      <form>
+      <form onSubmit={signup}>
         <Input
           type="text"
           placeholder="Nome"
@@ -37,7 +60,7 @@ export default function SignupPage() {
         <Input
           type="password"
           placeholder="Confirme a senha"
-          value={confirmPassoword}
+          value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.currentTarget.value)}
         />
         <BtnFullWidth text="Cadastrar" />
