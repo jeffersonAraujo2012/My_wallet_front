@@ -23,13 +23,12 @@ export default function HomePage() {
       if (localSession) {
         setSession(JSON.parse(localSession));
         return;
-      }
-      else {
+      } else {
         navigate("/");
         return;
       }
     }
-    
+
     const registerPromise = axios.get("http://localhost:5000/registers", {
       headers: {
         authorization: `Bearer ${session.token}`,
@@ -42,9 +41,14 @@ export default function HomePage() {
     });
 
     registerPromise.catch((error) => {
-      console.log("Algo deu errado ao solicitar os registros: " + error.response.data);
+      if (error.response.status === 401) {
+        localStorage.removeItem("session");
+        setSession(undefined);
+        alert("Sua sessão expirou!");
+        navigate("/");
+      }
     });
-  },[navigate, session, setSession]);
+  }, [navigate, session, setSession]);
 
   return (
     <HomePageStyle>
@@ -56,12 +60,12 @@ export default function HomePage() {
       <Registers registers={registers} />
 
       <div>
-        <button>
+        <button onClick={() => navigate("/nova-entrada")}>
           <IonIcon icon={addCircleOutline} />
           <p>Nova entrada</p>
         </button>
 
-        <button>
+        <button onClick={() => navigate("/nova-saida")}>
           <IonIcon icon={removeCircleOutline} />
           <p>Nova saída</p>
         </button>
