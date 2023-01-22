@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import ResetCss from "./style/ResetCss";
@@ -33,12 +33,23 @@ const router = createBrowserRouter([
   },
 ]);
 
+export const AuthContext = createContext();
+
 export default function App() {
+  const [session, setSession] = useState();
+
+  useEffect(() => {
+    const localSession = localStorage.getItem("session");
+    if (localSession) setSession(JSON.parse(localSession));
+  }, []);
+
   return (
     <React.StrictMode>
       <ResetCss />
       <GlobalStyle />
-      <RouterProvider router={router} />
+      <AuthContext.Provider value={[session, setSession]}>
+        <RouterProvider router={router} />
+      </AuthContext.Provider>
     </React.StrictMode>
   );
 }
