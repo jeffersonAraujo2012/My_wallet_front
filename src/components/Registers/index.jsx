@@ -1,149 +1,51 @@
+import { PuffLoader } from "react-spinners";
 import styled from "styled-components";
-import { TEXT_CASH_IN, TEXT_CASH_OUT } from "../../constants/colors";
+import {
+  TEXT_CASH_IN,
+  TEXT_CASH_OUT,
+  BTN_BACKGROUND_COLOR,
+} from "../../constants/colors";
 import Register from "./Register";
 
-export default function Registers() {
-  const registers = [
-    {
-      id: 0,
-      date: new Date(),
-      description: "Jantar com o amor",
-      value: 129.9,
-      type: "out",
-    },
-    {
-      id: 1,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "in",
-    },
-    {
-      id: 2,
-      date: new Date(),
-      description: "Jantar com o amor",
-      value: 129.9,
-      type: "out",
-    },
-    {
-      id: 3,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "in",
-    },
-    {
-      id: 4,
-      date: new Date(),
-      description: "Jantar com o amor",
-      value: 129.9,
-      type: "out",
-    },
-    {
-      id: 5,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "in",
-    },
-    {
-      id: 6,
-      date: new Date(),
-      description: "Jantar com o amor",
-      value: 129.9,
-      type: "out",
-    },
-    {
-      id: 7,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "in",
-    },
-    {
-      id: 8,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "in",
-    },
-    {
-      id: 9,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "in",
-    },
-    {
-      id: 10,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "in",
-    },
-    {
-      id: 11,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "in",
-    },
-    {
-      id: 12,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "in",
-    },
-    {
-      id: 13,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "out",
-    },
-    {
-      id: 14,
-      date: new Date(),
-      description: "Venda realizada",
-      value: 600.0,
-      type: "out",
-    },
-  ];
+export default function Registers({ registers }) {
   let balance = 0;
 
-  registers.forEach((reg) => {
+  registers?.forEach((reg) => {
     if (reg.type === "in") balance += Number(reg.value);
     if (reg.type === "out") balance -= Number(reg.value);
   });
 
-  if (registers.length === 0) {
-    return <h2>Não há registros de entrada ou saída</h2>;
-  }
-
   return (
-    <StyledRegisters>
-      {registers.map((reg) => {
-        return (
-          <Register
-            key={reg.id}
-            date={reg.date}
-            description={reg.description}
-            value={reg.value}
-            type={reg.type}
-          />
-        );
-      })}
+    <StyledRegisters registers={!!registers}>
+      {!registers && <PuffLoader color={BTN_BACKGROUND_COLOR} />}
 
-      <div className="balance">
-        <p>SALDO</p>
-        <p className="balance__value">
-          {Math.abs(balance).toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
+      {registers?.length === 0 && <h2>Não há registros de entrada ou saída</h2>}
+
+      {registers && registers.length > 0 && (
+        <>
+          {registers.map((reg) => {
+            return (
+              <Register
+                key={reg._id}
+                date={reg.date}
+                description={reg.description}
+                value={reg.value}
+                type={reg.type}
+              />
+            );
           })}
-        </p>
-      </div>
+
+          <div className="balance">
+            <p>SALDO</p>
+            <p className="balance__value">
+              {Math.abs(balance).toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </p>
+          </div>
+        </>
+      )}
     </StyledRegisters>
   );
 }
@@ -155,6 +57,8 @@ const StyledRegisters = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: ${(props) =>
+    !props.registers || props.registers?.length === 0 ? "center" : "initial"};
 
   width: 100%;
   max-height: calc(100vh - 221px);
@@ -195,6 +99,7 @@ const StyledRegisters = styled.section`
     width: 100%;
     padding: 10px 0;
     background-color: white;
+    margin-top: auto;
 
     p {
       font-size: 17px;
@@ -204,7 +109,7 @@ const StyledRegisters = styled.section`
 
     p.balance__value {
       font-weight: 400;
-      color: ${props => props.balance < 0 ? TEXT_CASH_OUT : TEXT_CASH_IN}
+      color: ${(props) => (props.balance < 0 ? TEXT_CASH_OUT : TEXT_CASH_IN)};
     }
   }
 `;
