@@ -30,12 +30,23 @@ export default function LoginPage() {
 
     loginPromise.then((res) => {
       const newSession = res.data;
-      setSession(newSession)
+      setSession(newSession);
       localStorage.setItem("session", JSON.stringify(newSession));
       navigate("/home");
     });
 
-    loginPromise.catch((error) => console.log("Algo deu errado no login"));
+    loginPromise.catch((error) => {
+      if (error.response.status === 422) {
+        const data = error.response.data;
+        if (typeof data === "string") {
+          alert(data);
+        } else {
+          data.forEach((err) => {
+            alert(err.message);
+          });
+        }
+      }
+    });
   }
   return (
     <LoginPageStyle>

@@ -43,18 +43,35 @@ export default function HomePage() {
     registerPromise.catch((error) => {
       if (error.response.status === 401) {
         localStorage.removeItem("session");
-        setSession(undefined);
         alert("Sua sessão expirou!");
         navigate("/");
       }
     });
   }, [navigate, session, setSession]);
 
+  async function signOut() {
+    const signoutPromise = axios.delete("http://localhost:5000/signout", {
+      headers: {
+        authorization: `Bearer ${session.token}`,
+        user_id: session.userId,
+      },
+    })
+    signoutPromise.then(() => {
+      alert("Até a próxima");
+      setSession(undefined);
+      localStorage.removeItem("session");
+      window.location("/");
+    })
+    signoutPromise.catch(err => {
+      alert("Algo deu errado ao sair");
+    })
+  }
+
   return (
     <HomePageStyle>
       <header>
         <PageTitle text="Olá, Fulano" />
-        <img src={logOutIcon} alt="Sair" />
+        <img onClick={signOut} src={logOutIcon} alt="Sair" />
       </header>
 
       <Registers registers={registers} />
