@@ -58,9 +58,10 @@ export default function HomePage() {
     })
     signoutPromise.then(() => {
       alert("Até a próxima");
-      setSession(undefined);
       localStorage.removeItem("session");
-      window.location("/");
+      setSession(undefined);
+      //navigate("/");
+      window.location.pathname = "/";
     })
     signoutPromise.catch(err => {
       alert("Algo deu errado ao sair");
@@ -70,7 +71,7 @@ export default function HomePage() {
   return (
     <HomePageStyle>
       <header>
-        <PageTitle text="Olá, Fulano" />
+        <PageTitle text={`Olá, ${session?.name}`} />
         <img onClick={signOut} src={logOutIcon} alt="Sair" />
       </header>
 

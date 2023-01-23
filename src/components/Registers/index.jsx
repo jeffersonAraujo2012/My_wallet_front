@@ -16,7 +16,7 @@ export default function Registers({ registers }) {
   });
 
   return (
-    <StyledRegisters registers={!!registers}>
+    <StyledRegisters registers={!!registers} balance={balance}>
       {!registers && <PuffLoader color={BTN_BACKGROUND_COLOR} />}
 
       {registers?.length === 0 && <h2>Não há registros de entrada ou saída</h2>}
